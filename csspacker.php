@@ -56,8 +56,9 @@ class cssPacker{
 		if(!file_exists($this->dest)) mkdir($this->dest,0777);
 		$css_content = '';
 
-		foreach($this->cssList as $url)
-    	{$css_content .= @file_get_contents($url);}
+		foreach($this->cssList as $url){
+			$css_content .= @file_get_contents($url);
+		}
 
     	$css_content = preg_replace("/[\r\n]/",'',$css_content);
     	$css_content = preg_replace("/\s/","",$css_content);

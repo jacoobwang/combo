@@ -56,13 +56,12 @@ class jsPacker{
 		if(!file_exists($this->dest)) mkdir($this->dest,0777);
 		$js_content = '';
 
-    	foreach($this->jsList as $url)
-        {
-            $append_content = @file_get_contents($url)."\r\n";
-            $packer = new JavaScriptPacker($append_content);
-            $append_content = $packer->pack();
-            $js_content .= $append_content;
-        }
+    	foreach($this->jsList as $url){
+    		$append_content = @file_get_contents($url)."\r\n";
+    		$packer = new JavaScriptPacker($append_content);
+    		$append_content = $packer->pack();
+    		$js_content .= $append_content;
+    	}
     	@file_put_contents($js_url,$js_content);
 	}
 
