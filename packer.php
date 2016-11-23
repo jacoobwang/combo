@@ -12,6 +12,7 @@
 						break;
 					
 					case 'js':
+						require_once "javascriptpacker.php";
 						require_once 'jspacker.php';
 						new jsPacker($config);
 						break;
