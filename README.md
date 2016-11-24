@@ -11,3 +11,5 @@ js合并采用了国外大牛写的一个js压缩类，支持4种格式压缩
 参考http://dean.edwards.name/packer/usage/
 
 更多信息访问个人博客 http://www.loadphp.cn/
+
+运行截图： ![dhE64A4C23E1002DE](dhE64A4C23E1002DE.png)
