@@ -6,29 +6,22 @@ class jsPacker{
 	private $dest = '';
 	private $src  = '';
 	private $name = '';
-
+	
 	public function __construct($config){
-		if(empty($config)){
-			//Loogger::error('config');
-			exit;
-		}
 		$this->dest = str_replace("/", "\\", $config['dest']);
 		$this->src  = str_replace("/", "\\", $config['src']);
 		$this->name = $config['name'];
-
 		if(substr($this->dest,0,1) == "."){
 			$this->dest = __DIR__.substr($this->dest,1);
 		}
 		if(substr($this->src,0,1) == "."){
 			$this->src = __DIR__.substr($this->src,1);
 		}
-
 		$this->_getJsList();
 		if(!empty($this->jsList)){
 			$this->_combineJs();
 		}
 	}
-
 	/**
 	* 获取目录下所有js-file
 	**/
@@ -44,7 +37,6 @@ class jsPacker{
 			}
 		}
 	}
-
 	/**
 	* 合并js
 	**/
@@ -57,21 +49,21 @@ class jsPacker{
 		$js_content = '';
 
     	foreach($this->jsList as $url){
+    		Logger::append('starting '.$url.' ...');
     		$append_content = @file_get_contents($url)."\r\n";
-    		$packer = new JavaScriptPacker($append_content);
+    		$packer = new JavaScriptPacker($append_content,0);
     		$append_content = $packer->pack();
     		$js_content .= $append_content;
     	}
     	@file_put_contents($js_url,$js_content);
+    	Logger::append('new file:'.$js_url);
+    	Logger::append('finished js task');
 	}
-
 	/**
 	* 产生随机值
 	**/
 	private function _generateName(){
 		return md5(substr('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',rand(1,52)).time()).'min.js';
 	}
-
 }
-
 ?>
